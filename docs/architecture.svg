@@ -1,0 +1,154 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="1010" viewBox="0 0 1200 1010" font-family="'Segoe UI','PingFang SC','Microsoft YaHei',sans-serif">
+  <defs>
+    <marker id="ar" markerWidth="9" markerHeight="9" refX="7" refY="3.5" orient="auto">
+      <path d="M0,0 L7,3.5 L0,7 Z" fill="#94a3b8"/>
+    </marker>
+    <marker id="arAmber" markerWidth="9" markerHeight="9" refX="7" refY="3.5" orient="auto">
+      <path d="M0,0 L7,3.5 L0,7 Z" fill="#b45309"/>
+    </marker>
+  </defs>
+
+  <rect width="1200" height="1010" fill="#ffffff"/>
+  <text x="600" y="34" text-anchor="middle" font-size="21" font-weight="700" fill="#1e293b">AssistGen 系统架构</text>
+
+  <!-- ===== 第一层:前端 ===== -->
+  <rect x="80" y="52" width="1040" height="140" rx="10" fill="#f5f7ff" stroke="#c7d2fe" stroke-width="1.5"/>
+  <text x="100" y="80" font-size="15" font-weight="700" fill="#4338ca">前端 · Vue 3 + TypeScript + Element Plus</text>
+  <text x="1098" y="80" text-anchor="end" font-size="12" fill="#64748b">构建产物由后端同源托管（static/dist），无需独立部署</text>
+  <g>
+    <rect x="110" y="96" width="300" height="74" rx="8" fill="#ffffff" stroke="#c7d2fe"/>
+    <text x="260" y="122" text-anchor="middle" font-size="13.5" font-weight="600" fill="#1e293b">HomeView · 通用客服</text>
+    <text x="260" y="146" text-anchor="middle" font-size="11.5" fill="#64748b">问答 / 深度思考 / 联网检索 / 知识库</text>
+    <rect x="440" y="96" width="300" height="74" rx="8" fill="#ffffff" stroke="#c7d2fe"/>
+    <text x="590" y="122" text-anchor="middle" font-size="13.5" font-weight="600" fill="#1e293b">EcommerceView · 电商智能体</text>
+    <text x="590" y="146" text-anchor="middle" font-size="11.5" fill="#64748b">图谱问答 / 图表 / 图片识别 / 断点恢复</text>
+    <rect x="770" y="96" width="300" height="74" rx="8" fill="#ffffff" stroke="#c7d2fe"/>
+    <text x="920" y="122" text-anchor="middle" font-size="13.5" font-weight="600" fill="#1e293b">LoginView · 认证与会话</text>
+    <text x="920" y="146" text-anchor="middle" font-size="11.5" fill="#64748b">注册 / 登录 / 会话列表（Pinia）</text>
+  </g>
+
+  <line x1="600" y1="192" x2="600" y2="228" stroke="#94a3b8" stroke-width="2" marker-end="url(#ar)"/>
+  <text x="614" y="216" font-size="11.5" fill="#64748b">HTTP · /api/* · /chat-rag · SSE 流式返回</text>
+
+  <!-- ===== 第二层:FastAPI 后端 ===== -->
+  <rect x="80" y="232" width="1040" height="200" rx="10" fill="#f2fbfa" stroke="#99f6e4" stroke-width="1.5"/>
+  <text x="100" y="260" font-size="15" font-weight="700" fill="#0f766e">后端 · FastAPI + Uvicorn（run.py，默认 0.0.0.0:8000，APP_ENV / HOST / PORT 环境变量可覆盖）</text>
+  <g font-size="12" fill="#1e293b">
+    <rect x="110" y="276" width="240" height="44" rx="7" fill="#ffffff" stroke="#99f6e4"/>
+    <text x="230" y="295" text-anchor="middle" font-weight="600">JWT 认证</text>
+    <text x="230" y="312" text-anchor="middle" font-size="10.5" fill="#64748b">/api/register · /api/token · /users/me</text>
+    <rect x="363" y="276" width="240" height="44" rx="7" fill="#ffffff" stroke="#99f6e4"/>
+    <text x="483" y="295" text-anchor="middle" font-weight="600">会话管理</text>
+    <text x="483" y="312" text-anchor="middle" font-size="10.5" fill="#64748b">/api/conversations（增删改查）</text>
+    <rect x="616" y="276" width="240" height="44" rx="7" fill="#ffffff" stroke="#99f6e4"/>
+    <text x="736" y="295" text-anchor="middle" font-weight="600">通用问答 / 深度思考</text>
+    <text x="736" y="312" text-anchor="middle" font-size="10.5" fill="#64748b">/api/chat · /api/reason（SSE）</text>
+    <rect x="869" y="276" width="240" height="44" rx="7" fill="#ffffff" stroke="#99f6e4"/>
+    <text x="989" y="295" text-anchor="middle" font-weight="600">联网检索</text>
+    <text x="989" y="312" text-anchor="middle" font-size="10.5" fill="#64748b">/api/search（SerpAPI）</text>
+    <rect x="110" y="332" width="240" height="44" rx="7" fill="#ffffff" stroke="#99f6e4"/>
+    <text x="230" y="351" text-anchor="middle" font-weight="600">本地知识库 RAG</text>
+    <text x="230" y="368" text-anchor="middle" font-size="10.5" fill="#64748b">/chat-rag · /api/upload</text>
+    <rect x="363" y="332" width="240" height="44" rx="7" fill="#ffffff" stroke="#99f6e4"/>
+    <text x="483" y="351" text-anchor="middle" font-weight="600">电商智能体</text>
+    <text x="483" y="368" text-anchor="middle" font-size="10.5" fill="#64748b">/api/langgraph/query · /resume</text>
+    <rect x="616" y="332" width="240" height="44" rx="7" fill="#ffffff" stroke="#99f6e4"/>
+    <text x="736" y="351" text-anchor="middle" font-weight="600">文档 / 图片上传</text>
+    <text x="736" y="368" text-anchor="middle" font-size="10.5" fill="#64748b">/api/upload · /api/upload/image</text>
+    <rect x="869" y="332" width="240" height="44" rx="7" fill="#ffffff" stroke="#99f6e4"/>
+    <text x="989" y="351" text-anchor="middle" font-weight="600">基础设施</text>
+    <text x="989" y="368" text-anchor="middle" font-size="10.5" fill="#64748b">配置 / 日志 / 中间件 / /health</text>
+  </g>
+  <text x="600" y="412" text-anchor="middle" font-size="11.5" fill="#64748b">api/ · core/ · models/ · schemas/ · services/ · prompts/ · tools/ · lg_agent/ · graphrag/</text>
+
+  <!-- 后端 → 中间层 三条箭头 -->
+  <line x1="245" y1="432" x2="245" y2="466" stroke="#94a3b8" stroke-width="2" marker-end="url(#ar)"/>
+  <line x1="600" y1="432" x2="600" y2="466" stroke="#94a3b8" stroke-width="2" marker-end="url(#ar)"/>
+  <line x1="955" y1="432" x2="955" y2="466" stroke="#94a3b8" stroke-width="2" marker-end="url(#ar)"/>
+  <text x="259" y="456" font-size="11.5" fill="#64748b">模型调用</text>
+  <text x="614" y="456" font-size="11.5" fill="#64748b">工作流驱动</text>
+  <text x="969" y="456" font-size="11.5" fill="#64748b">检索 / 缓存</text>
+
+  <!-- ===== 第三层:三列 ===== -->
+  <!-- 列A 模型服务 -->
+  <rect x="80" y="470" width="330" height="270" rx="10" fill="#f5f7ff" stroke="#c7d2fe" stroke-width="1.5"/>
+  <text x="100" y="498" font-size="14.5" font-weight="700" fill="#4338ca">模型服务层（可配置切换）</text>
+  <rect x="100" y="512" width="290" height="62" rx="7" fill="#ffffff" stroke="#c7d2fe"/>
+  <text x="245" y="536" text-anchor="middle" font-size="12.5" font-weight="600" fill="#1e293b">DeepSeek 在线 API</text>
+  <text x="245" y="558" text-anchor="middle" font-size="11" fill="#64748b">V3 对话 · R1 深度推理</text>
+  <rect x="100" y="586" width="290" height="62" rx="7" fill="#ffffff" stroke="#c7d2fe"/>
+  <text x="245" y="610" text-anchor="middle" font-size="12.5" font-weight="600" fill="#1e293b">Ollama 本地部署</text>
+  <text x="245" y="632" text-anchor="middle" font-size="11" fill="#64748b">Qwen2.5 · DeepSeek-R1 · bge-m3</text>
+  <rect x="100" y="660" width="290" height="62" rx="7" fill="#ffffff" stroke="#c7d2fe"/>
+  <text x="245" y="684" text-anchor="middle" font-size="12.5" font-weight="600" fill="#1e293b">视觉模型</text>
+  <text x="245" y="706" text-anchor="middle" font-size="11" fill="#64748b">上传图片识别（OpenAI 兼容接口）</text>
+
+  <!-- 列B LangGraph 工作流 -->
+  <rect x="435" y="470" width="330" height="270" rx="10" fill="#fffbeb" stroke="#fde68a" stroke-width="1.5"/>
+  <text x="455" y="498" font-size="14.5" font-weight="700" fill="#b45309">电商智能体 · LangGraph 工作流</text>
+  <rect x="475" y="510" width="250" height="30" rx="6" fill="#ffffff" stroke="#fde68a"/>
+  <text x="600" y="530" text-anchor="middle" font-size="12" font-weight="600" fill="#1e293b">① 意图规划 Planner</text>
+  <line x1="600" y1="540" x2="600" y2="554" stroke="#b45309" stroke-width="1.6" marker-end="url(#arAmber)"/>
+  <rect x="475" y="556" width="250" height="30" rx="6" fill="#ffffff" stroke="#fde68a"/>
+  <text x="600" y="576" text-anchor="middle" font-size="12" font-weight="600" fill="#1e293b">② 工具选择 Tool Selection</text>
+  <line x1="600" y1="586" x2="600" y2="600" stroke="#b45309" stroke-width="1.6" marker-end="url(#arAmber)"/>
+  <text x="600" y="598" text-anchor="middle" font-size="9.5" fill="#92400e">选择一个或组合</text>
+  <g font-size="11" font-weight="600" fill="#1e293b">
+    <rect x="447" y="606" width="96" height="40" rx="6" fill="#ffffff" stroke="#fde68a"/>
+    <text x="495" y="630" text-anchor="middle">Cypher 生成</text>
+    <rect x="552" y="606" width="96" height="40" rx="6" fill="#ffffff" stroke="#fde68a"/>
+    <text x="600" y="630" text-anchor="middle">图谱检索</text>
+    <rect x="657" y="606" width="96" height="40" rx="6" fill="#ffffff" stroke="#fde68a"/>
+    <text x="705" y="630" text-anchor="middle">图表生成</text>
+  </g>
+  <line x1="600" y1="646" x2="600" y2="660" stroke="#b45309" stroke-width="1.6" marker-end="url(#arAmber)"/>
+  <rect x="475" y="662" width="250" height="30" rx="6" fill="#ffffff" stroke="#fde68a"/>
+  <text x="600" y="682" text-anchor="middle" font-size="12" font-weight="600" fill="#1e293b">③ 校验 · 汇总回答（Guardrails）</text>
+  <text x="600" y="716" text-anchor="middle" font-size="10.5" fill="#92400e">MemorySaver 保存断点，支持多轮打断恢复（/api/langgraph/resume）</text>
+
+  <!-- 列C 检索与缓存 -->
+  <rect x="790" y="470" width="330" height="270" rx="10" fill="#f5f3ff" stroke="#ddd6fe" stroke-width="1.5"/>
+  <text x="810" y="498" font-size="14.5" font-weight="700" fill="#6d28d9">检索与缓存</text>
+  <rect x="810" y="512" width="290" height="62" rx="7" fill="#ffffff" stroke="#ddd6fe"/>
+  <text x="955" y="536" text-anchor="middle" font-size="12.5" font-weight="600" fill="#1e293b">本地向量检索</text>
+  <text x="955" y="558" text-anchor="middle" font-size="11" fill="#64748b">sentence-transformers + FAISS</text>
+  <rect x="810" y="586" width="290" height="62" rx="7" fill="#ffffff" stroke="#ddd6fe"/>
+  <text x="955" y="610" text-anchor="middle" font-size="12.5" font-weight="600" fill="#1e293b">GraphRAG 索引查询</text>
+  <text x="955" y="632" text-anchor="middle" font-size="11" fill="#64748b">local / global / drift / basic 四种方式</text>
+  <rect x="810" y="660" width="290" height="62" rx="7" fill="#ffffff" stroke="#ddd6fe"/>
+  <text x="955" y="684" text-anchor="middle" font-size="12.5" font-weight="600" fill="#1e293b">Redis 语义缓存</text>
+  <text x="955" y="706" text-anchor="middle" font-size="11" fill="#64748b">相似问法直接命中返回，省模型调用</text>
+
+  <!-- 中间层 → 存储层 -->
+  <line x1="245" y1="740" x2="245" y2="778" stroke="#94a3b8" stroke-width="2" marker-end="url(#ar)"/>
+  <line x1="600" y1="740" x2="600" y2="778" stroke="#94a3b8" stroke-width="2" marker-end="url(#ar)"/>
+  <line x1="955" y1="740" x2="955" y2="778" stroke="#94a3b8" stroke-width="2" marker-end="url(#ar)"/>
+  <text x="259" y="766" font-size="11.5" fill="#64748b">会话持久化</text>
+  <text x="614" y="766" font-size="11.5" fill="#64748b">Cypher 查询图谱</text>
+  <text x="969" y="766" font-size="11.5" fill="#64748b">向量 / 索引读写</text>
+
+  <!-- ===== 第四层:存储 ===== -->
+  <rect x="80" y="782" width="1040" height="150" rx="10" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5"/>
+  <text x="100" y="810" font-size="14.5" font-weight="700" fill="#334155">数据与索引层</text>
+  <g font-size="12" fill="#1e293b">
+    <rect x="105" y="824" width="240" height="88" rx="7" fill="#ffffff" stroke="#cbd5e1"/>
+    <text x="225" y="848" text-anchor="middle" font-weight="600">MySQL 8</text>
+    <text x="225" y="870" text-anchor="middle" font-size="10.5" fill="#64748b">users · conversations · messages</text>
+    <text x="225" y="888" text-anchor="middle" font-size="10.5" fill="#94a3b8">必须 · scripts/init_db.py 建表</text>
+    <rect x="360" y="824" width="240" height="88" rx="7" fill="#ffffff" stroke="#cbd5e1"/>
+    <text x="480" y="848" text-anchor="middle" font-weight="600">Neo4j 5</text>
+    <text x="480" y="870" text-anchor="middle" font-size="10.5" fill="#64748b">电商图谱：8 类节点 · 9 类关系</text>
+    <text x="480" y="888" text-anchor="middle" font-size="10.5" fill="#94a3b8">仅电商智能体需要</text>
+    <rect x="615" y="824" width="240" height="88" rx="7" fill="#ffffff" stroke="#cbd5e1"/>
+    <text x="735" y="848" text-anchor="middle" font-weight="600">FAISS / LanceDB</text>
+    <text x="735" y="870" text-anchor="middle" font-size="10.5" fill="#64748b">向量索引 · GraphRAG parquet 产物</text>
+    <text x="735" y="888" text-anchor="middle" font-size="10.5" fill="#94a3b8">内置一份可用索引</text>
+    <rect x="870" y="824" width="240" height="88" rx="7" fill="#ffffff" stroke="#cbd5e1"/>
+    <text x="990" y="848" text-anchor="middle" font-weight="600">uploads /（MinerU 可选）</text>
+    <text x="990" y="870" text-anchor="middle" font-size="10.5" fill="#64748b">PDF · Word · CSV · 图片</text>
+    <text x="990" y="888" text-anchor="middle" font-size="10.5" fill="#94a3b8">PDF 建图谱索引需外部 MinerU</text>
+  </g>
+
+  <rect x="80" y="952" width="1040" height="42" rx="8" fill="#f1f5f9"/>
+  <text x="600" y="978" text-anchor="middle" font-size="12" fill="#475569">可选依赖：Ollama / Redis / Neo4j / MinerU 缺失只影响对应链路，不影响主流程 · 默认单进程（LangGraph 断点存于进程内存）</text>
+</svg>

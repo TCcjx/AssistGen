@@ -1,0 +1,95 @@
+/** 主题变量：data-theme 驱动本项目样式，html.dark 驱动 Element Plus 暗色 */
+
+:root,
+[data-theme='light'] {
+  --bg-app: #f4f5f3;
+  --bg-panel: #ffffff;
+  --bg-sunken: #eceeeb;
+  --bg-hover: #e4e7e3;
+  --bg-active: #d9efeb;
+
+  --border-soft: #dfe2de;
+  --border-strong: #c8ccc7;
+
+  --text-primary: #1d2422;
+  --text-secondary: #5b6663;
+  --text-muted: #87908d;
+
+  --accent: #0f766e;
+  --accent-hover: #0d655e;
+  --accent-soft: #d9efeb;
+  --accent-text: #ffffff;
+
+  --think: #92610a;
+  --think-soft: #fbf1dc;
+  --think-border: #ecd9ab;
+
+  --danger: #b4342c;
+  --danger-soft: #fbe9e7;
+
+  --user-bubble: #0f766e;
+  --user-bubble-text: #f6fffd;
+
+  --shadow-pop: 0 6px 24px rgba(24, 34, 31, 0.14);
+  --code-bg: #f2f4f1;
+
+  /* 覆盖 Element Plus 主色，保持与本项目一致 */
+  --el-color-primary: #0f766e;
+  --el-color-primary-light-3: #3d9a90;
+  --el-color-primary-light-5: #6fb8ae;
+  --el-color-primary-light-7: #a5d5cd;
+  --el-color-primary-light-8: #c1e2dc;
+  --el-color-primary-light-9: #d9efeb;
+  --el-color-primary-dark-2: #0c5f58;
+  --el-border-radius-base: 6px;
+}
+
+[data-theme='dark'] {
+  --bg-app: #14181a;
+  --bg-panel: #1b2124;
+  --bg-sunken: #121618;
+  --bg-hover: #232b2e;
+  --bg-active: #1d3a37;
+
+  --border-soft: #293134;
+  --border-strong: #3a4448;
+
+  --text-primary: #e4e9e7;
+  --text-secondary: #a7b1ae;
+  --text-muted: #77817e;
+
+  --accent: #2dd4bf;
+  --accent-hover: #5ee0d0;
+  --accent-soft: #16332f;
+  --accent-text: #06231f;
+
+  --think: #e0b464;
+  --think-soft: #2a2418;
+  --think-border: #4a3d22;
+
+  --danger: #f08a80;
+  --danger-soft: #33201e;
+
+  --user-bubble: #14564e;
+  --user-bubble-text: #e6fffa;
+
+  --shadow-pop: 0 8px 28px rgba(0, 0, 0, 0.5);
+  --code-bg: #12171a;
+
+  --el-color-primary: #2dd4bf;
+  --el-color-primary-light-3: #22a99a;
+  --el-color-primary-light-5: #1a8377;
+  --el-color-primary-light-7: #135d55;
+  --el-color-primary-light-8: #104a44;
+  --el-color-primary-light-9: #0d3733;
+  --el-color-primary-dark-2: #5ee0d0;
+  --el-bg-color: #1b2124;
+  --el-bg-color-overlay: #1b2124;
+  --el-bg-color-page: #14181a;
+  --el-text-color-primary: #e4e9e7;
+  --el-text-color-regular: #a7b1ae;
+  --el-border-color: #293134;
+  --el-border-color-light: #293134;
+  --el-border-color-lighter: #232b2e;
+  --el-fill-color-blank: #1b2124;
+}
