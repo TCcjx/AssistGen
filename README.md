@@ -527,25 +527,37 @@ location / {
 ## 常见问题
 
 **安装依赖时报 `graphrag` 无法安装 / `No matching distribution found`**
-Python 版本不在 3.11 ~ 3.12 区间。请切换到 3.12 后重建虚拟环境。
+先执行 `python --version` 检查版本。项目只支持 Python 3.11 或 3.12；如果当前环境是 3.10、3.13 或更高版本，请切换到 Python 3.12 后重建虚拟环境，再执行 `pip install -r requirements.txt`。
 
 **启动时报数据库连接错误**
-确认 MySQL 已启动、`assist_gen` 数据库已创建、`.env` 中的账号密码正确，且已执行 `python scripts/init_db.py`。
+按以下顺序排查：
+
+1. 确认 MySQL 服务已启动，并确认 `DB_HOST`、`DB_PORT`、`DB_USER`、`DB_PASSWORD`、`DB_NAME` 与实际配置一致。
+2. 确认数据库已创建：`CREATE DATABASE assist_gen DEFAULT CHARACTER SET utf8mb4;`。
+3. 在 `llm_backend` 目录执行 `python scripts/init_db.py`，脚本会创建缺失的 `users`、`conversations`、`messages` 表。
+4. Windows 可执行 `Test-NetConnection localhost -Port 3306`，Linux/macOS 可执行 `nc -vz localhost 3306`，确认 MySQL 端口可达。
+
+不要使用 `--reset` 作为常规修复手段；该参数会删除现有业务数据。
 
 **启动时报 `ModuleNotFoundError: sentence_transformers`**
-依赖未装全，torch 属于启动硬依赖，必须完整执行 `pip install -r requirements.txt`。
+依赖未装全。先确认当前解释器和 pip 属于同一个虚拟环境：`python -m pip --version`，然后执行 `python -m pip install -r requirements.txt`。项目会在启动时导入 `sentence_transformers`，因此 `torch` 和 `sentence-transformers` 是启动硬依赖；安装后可用 `python -c "import sentence_transformers, faiss; print('ok')"` 验证。
 
 **端口被占用 / 想换端口**
-不需要改代码：`PORT=9000 python run.py`。
+不需要改代码。Linux/macOS 使用 `PORT=9000 python run.py`；Windows PowerShell 使用 `$env:PORT="9000"; python run.py`；Windows CMD 使用 `set PORT=9000 && python run.py`。也可以先用 `python scripts/preflight.py --port 9000` 检查端口是否空闲。
 
 **`/api/reason` 返回的是普通问答内容**
-`REASON_SERVICE` 选择 `deepseek` 时，深度思考依赖 `DEEPSEEK_REASON_MODEL`（默认 `deepseek-reasoner`），请勿与问答模型共用同一模型名。
+先检查 `REASON_SERVICE`：
+
+- 设置为 `deepseek` 时，使用 `DEEPSEEK_REASON_MODEL`，默认是 `deepseek-reasoner`，不要与 `DEEPSEEK_MODEL` 共用普通问答模型。
+- 设置为 `ollama` 时，使用 `OLLAMA_REASON_MODEL`，确认 Ollama 已启动，并且该模型已通过 `ollama list` 安装。
+
+修改 `llm_backend/.env` 后重启后端，再检查浏览器网络请求是否确实调用了 `/api/reason`。
 
 **电商智能体报 Neo4j 连接失败**
-该功能强依赖 Neo4j：确认服务已启动、`NEO4J_URL` / 账号密码正确，且已完成图谱数据导入。
+该功能强依赖 Neo4j。依次检查 `NEO4J_URL`、`NEO4J_USERNAME`、`NEO4J_PASSWORD`、`NEO4J_DATABASE`，确认 Neo4j 已启动且 Bolt 端口 `7687` 可达；Windows 可执行 `Test-NetConnection localhost -Port 7687`。连接成功后，还要确认已经导入电商图谱节点和关系，否则连接正常但查询仍可能返回空结果。
 
 **图片识别不可用**
-`VISION_API_KEY` 未填写或视觉模型服务不可达。
+确认 `VISION_API_KEY`、`VISION_BASE_URL`、`VISION_MODEL` 均已填写，并从运行后端的机器测试模型服务地址是否可达。若 API 返回认证错误，检查 Key 和模型权限；若返回连接错误，检查 Base URL、代理和网络；若上传接口成功但识别失败，查看 `llm_backend/logs` 中的视觉模型请求错误。
 
 ---
 
